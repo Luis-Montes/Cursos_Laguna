@@ -72,6 +72,58 @@
                   <label class="checkbox-item"><input type="checkbox" name="enterado" value="Otro">Otro</label>
                 </div>
             </div>
+
+            <div class="form-outline">
+                <label class="form-label text-form text-form" for="form6Example1">Curso</label>
+                <select class="form-control" name="curso" id="cursos">
+
+                    @foreach ($cursos as $curso)
+                     <!--aqui quedo tal cual como lo tenias con el value que sea igual al ID -->
+                        <option value="{{$curso->id}}" data-precio="{{$curso->price}}">{{$curso->name}}</option>
+                    @endforeach
+                </select>
+
+
+                <label class="form-label text-form text-form" for="form6Example1">Horario</label>
+                <select class="form-control" name="horario" id="horarios">
+                    <option value="vespertino">Por la Tarde</option>
+                    <option value="matutino">Por la Mañana</option>
+                </select>
+                <div class="col">
+                    <label class="form-label text-form text-form" for="form6Example1">Precio:</label>
+                    <div class="form-outline">
+                        
+                        <input id="idprecio" type="text" name="precio" value="{{$cursos[0]['price']}}" id="precio" readonly>
+                    </div>
+                </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <script>
+
+                    <!--aqui quedo tal cual como lo tenias con el value que sea igual al ID -->
+                    //aqui fue donde empezo la magia amigo
+                    $(document).ready(function(){
+                        //converti tu arreglo de cursos a JSON para poder ecorrerlo y comparar datos
+                         var cursos = @json($cursos);
+
+                        $('#cursos').change(function(){
+                            //una vez seleccionas algo entra en esta funcion y aqui ya tienes tu valor
+                            // del ID y ahora si puedes usar la funcion find 
+
+                            var precioSeleccionado = $(this).val();
+
+                            // aqui creas una variable que tome el dato de esa busqueda y que sea igual y lo retornas 
+                            var seleccion = cursos.find(function(elemento){
+                                return elemento.id == precioSeleccionado
+                            });
+                            if(seleccion){
+
+                                //aqui se lo mandas al input amigo y YYAAAAA.... 
+                                $('#idprecio').val(seleccion.price);
+                            }                                          
+                        });
+                    });
+                </script>
+            </div>
               
 
 
@@ -88,31 +140,31 @@
                                         Ninguno
                                     </label>
                                     <label class="checkbox-item">
-                                        <input type="radio" name="radio" value="Instagram">
+                                        <input type="radio" name="radiodesc" value="Instagram">
                                         15%
                                     </label>
                                     <label class="checkbox-item">
-                                        <input type="radio" name="radio" value="Twitter">
+                                        <input type="radio" name="radiodesc" value="Twitter">
                                         20%
                                     </label>
                                     <label class="checkbox-item">
-                                        <input type="radio" name="radio" value="Google">
+                                        <input type="radio" name="radiodesc" value="Google">
                                         Linea
                                     </label><br>
                                     <br>
                                     <input type="text">
                                     <label class="checkbox-item">
-                                        <input type="radio" name="radio" value="Google">
+                                        <input type="radio" name="radiodesc" value="Google">
                                         Promoción
                                     </label><br>
                                     <input type="text">
                                     <label class="checkbox-item">
-                                        <input type="radio" name="radio" value="Google">
+                                        <input type="radio" name="radiodesc" value="Google">
                                         Empresarial
                                     </label><br>
                                     <input type="text">
                                     <label class="checkbox-item">
-                                        <input type="radio" name="radio" value="Google">
+                                        <input type="radio" name="radiodesc" value="Google">
                                         Codigo Promocional
                                     </label><br>
 
@@ -123,58 +175,23 @@
                             </div>
                             </div>
                         </div>
+                        
+                        
+
                         <div class="col">
-                            <div class="form-outline">
-                                <label class="form-label text-form text-form" for="form6Example1">Curso</label>
-                                <select class="form-control" name="curso" id="cursos">
-    
-                                    @foreach ($cursos as $curso)
-                                     <!--aqui quedo tal cual como lo tenias con el value que sea igual al ID -->
-                                        <option value="{{$curso->id}}" data-precio="{{$curso->price}}">{{$curso->name}}</option>
-                                    @endforeach
-                                </select>
+                            <label for="">¿Traerás tu propio equipo?</label>
+                            <br>
+                            <input type="radio" name="radioequipo" value="NO"> No
+                            <br>
+                            <input type="radio" name="radioequipo" value="SI"> Si
+                            <br>
+                            <br>
+                            <label for="">¿Requieres Factura?</label>
+                            <br>
+                            <input type="radio" name="radiofactura" value="NO"> No
+                            <br>
+                            <input type="radio" name="radiofactura" value="SI"> Si
 
-
-                                <label class="form-label text-form text-form" for="form6Example1">Horario</label>
-                                <select class="form-control" name="horario" id="horarios">
-                                    <option value="vespertino">Por la Tarde</option>
-                                    <option value="matutino">Por la Mañana</option>
-                                </select>
-                                <div class="col">
-                                    <label class="form-label text-form text-form" for="form6Example1">Precio:</label>
-                                    <div class="form-outline">
-                                        
-                                        <input id="idprecio" type="text" name="precio" value="{{$cursos[0]['price']}}" id="precio" readonly>
-                                    </div>
-                                </div>
-                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                <script>
-
-                                    <!--aqui quedo tal cual como lo tenias con el value que sea igual al ID -->
-                                    //aqui fue donde empezo la magia amigo
-                                    $(document).ready(function(){
-                                        //converti tu arreglo de cursos a JSON para poder ecorrerlo y comparar datos
-                                         var cursos = @json($cursos);
-
-                                        $('#cursos').change(function(){
-                                            //una vez seleccionas algo entra en esta funcion y aqui ya tienes tu valor
-                                            // del ID y ahora si puedes usar la funcion find 
-
-                                            var precioSeleccionado = $(this).val();
-
-                                            // aqui creas una variable que tome el dato de esa busqueda y que sea igual y lo retornas 
-                                            var seleccion = cursos.find(function(elemento){
-                                                return elemento.id == precioSeleccionado
-                                            });
-                                            if(seleccion){
-
-                                                //aqui se lo mandas al input amigo y YYAAAAA.... 
-                                                $('#idprecio').val(seleccion.price);
-                                            }                                          
-                                        });
-                                    });
-                                </script>
-                            </div>
                         </div>
                 </div>
             </div>
