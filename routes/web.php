@@ -36,6 +36,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 // ALUMNOS
 Route::get('estudiantes', [StudentsController::class, 'index'])->name('estudiantes');
+// Route::get(/)
 // Route::post('estudiantes', [StudentsController::class, 'store']);
 
 // AGREGAR ALUMNO

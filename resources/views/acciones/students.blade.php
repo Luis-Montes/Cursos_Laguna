@@ -226,9 +226,6 @@
                         <th scope="col">NOMBRE</th>
                         <th scope="col">EMAIL</th>
                         <th scope="col">TELEFONO</th>
-                        <th scope="col">CURSO</th>
-                        <th scope="col">TURNO</th>
-                        <th scope="col">ENTERADO POR</th>
                         <th scope="col">DEUDA</th>
                         </tr>
                     </thead>
@@ -239,11 +236,14 @@
                                 <td> {{$alumno->name}} </td>
                                 <td> {{$alumno->email}} </td>
                                 <td> {{$alumno->telefono}} </td>
-                                <td> {{$alumno->curso->name}} </td>
-                                <td> {{$alumno->turno}} </td>
-                                <td> {{$alumno->enterado}} </td>
-                                <td> ${{$alumno->deuda}} </td>
-                            </tr>
+                                <td>
+                                    @if ($alumno->deuda != '0')
+                                        Si
+                                    @else
+                                        NO    
+                                    @endif
+                                </td>
+                                <td><button type="button" class="btn btn-info" onclick="abrirFormulario('matricula')">+</button></td>
                         @endforeach
                     </tbody>
                     </table>

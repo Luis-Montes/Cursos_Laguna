@@ -9,8 +9,9 @@ class AddStudentController extends Controller
 {
     public function index(){        
         $cursos = Curso::all();
+        $matricula = Curso::distinct()->get();
 
-        return view('acciones.add_student', ['cursos' => $cursos]);
+        return view('acciones.add_student', ['cursos' => $cursos, 'matricula' => $matricula]);
     }
 
     public function store(Request $request) {
